@@ -1,4 +1,4 @@
-package com.example.lease_a_car.customer;
+package com.example.lease_a_car.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

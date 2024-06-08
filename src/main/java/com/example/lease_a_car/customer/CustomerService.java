@@ -1,5 +1,6 @@
 package com.example.lease_a_car.customer;
 
+import com.example.lease_a_car.exceptions.CustomerNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

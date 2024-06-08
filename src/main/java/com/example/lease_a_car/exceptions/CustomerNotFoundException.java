@@ -1,4 +1,4 @@
-package com.example.lease_a_car.customer;
+package com.example.lease_a_car.exceptions;
 
 public class CustomerNotFoundException extends RuntimeException {
     public CustomerNotFoundException(Long id) {
