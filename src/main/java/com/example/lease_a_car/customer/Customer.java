@@ -1,6 +1,10 @@
 package com.example.lease_a_car.customer;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Data
@@ -19,11 +23,28 @@ public class Customer {
             generator = "customer_sequence"
     )
     private Long id;
+
+    @NotBlank(message= "Name is mandatory")
     private String name;
+
+    @NotBlank(message= "Street is mandatory")
     private String street;
+
+    @NotNull(message= "House number is mandatory")
     private Integer houseNumber;
+
+    @NotBlank(message= "Zipcode is mandatory")
+    @Size(min = 6, max=6, message = "Zipcode must be of format 1234AB")
     private String zipcode;
+
+    @NotBlank(message= "Place is mandatory")
     private String place;
+
+    @NotBlank(message= "Email is mandatory")
+    @Email(message = "Invalid email")
     private String email;
+
+    @NotBlank(message= "Phone number is mandatory")
+    @Size(min = 10, max=10, message = "Phone number must be 10 digits")
     private String phoneNumber;
 }

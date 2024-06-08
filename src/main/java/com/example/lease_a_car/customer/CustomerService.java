@@ -1,6 +1,5 @@
 package com.example.lease_a_car.customer;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,15 +32,22 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public void updateCustomer(Customer updatedCustomer) {
-        Optional<Customer> existingCustomerOptional = customerRepository.findById(updatedCustomer.getId());
+    public void updateCustomer(Long customerId, CustomerDTO updatedCustomer) {
+        Optional<Customer> existingCustomerOptional = customerRepository.findById(customerId);
         if (existingCustomerOptional.isPresent()) {
             Customer existingCustomer = updateCustomer(updatedCustomer, existingCustomerOptional.get());
             customerRepository.save(existingCustomer);
         } else {
-            throw new CustomerNotFoundException(updatedCustomer.getId());
-            // todo customerRepository.save(updatedCustomer) ipv error gooien
+            customerRepository.save(convertToEntity(updatedCustomer));
         }
+
+//        customerRepository.findById(customerId)
+//                .map(customer -> {
+//                    Customer changedCustomer = updateCustomer(updatedCustomer, customer);
+//                    customerRepository.save(changedCustomer);
+//                    return null;
+//                })
+//                .orElse(customerRepository.save(convertToEntity(updatedCustomer)));
     }
 
     private CustomerDTO convertToDto(Customer customer) {
@@ -69,7 +75,7 @@ public class CustomerService {
 
     }
 
-    private static Customer updateCustomer(Customer updatedCustomer, Customer existingCustomer) {
+    private static Customer updateCustomer(CustomerDTO updatedCustomer, Customer existingCustomer) {
         existingCustomer.setName(updatedCustomer.getName());
         existingCustomer.setStreet(updatedCustomer.getStreet());
         existingCustomer.setHouseNumber(updatedCustomer.getHouseNumber());

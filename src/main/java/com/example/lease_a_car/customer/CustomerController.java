@@ -1,5 +1,6 @@
 package com.example.lease_a_car.customer;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
         CustomerDTO savedCustomer = customerService.saveCustomer(customerDTO);
         return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
@@ -34,9 +35,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    public void updateCustomer(@PathVariable Long customerId, @RequestBody Customer updatedCustomer) {
-        customerService.updateCustomer(updatedCustomer);
+    public void updateCustomer(@PathVariable Long customerId, @Valid @RequestBody CustomerDTO updatedCustomer) {
+        customerService.updateCustomer(customerId, updatedCustomer);
     }
-
-
 }
