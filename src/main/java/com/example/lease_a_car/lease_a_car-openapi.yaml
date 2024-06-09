@@ -1,0 +1,104 @@
+openapi: "3.1.0"
+info:
+  title: "lease_a_car API"
+  description: "lease_a_car API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /api/v1/customers:
+    get:
+      summary: "GET api/v1/customers"
+      operationId: "getAllCustomers"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/CustomerDto"
+    post:
+      summary: "POST api/v1/customers"
+      operationId: "createCustomer"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerDto"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CustomerDto"
+  /api/v1/customers/{customerId}:
+    delete:
+      summary: "DELETE api/v1/customers/{customerId}"
+      operationId: "deleteCustomer"
+      parameters:
+        - name: "customerId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Object"
+    put:
+      summary: "PUT api/v1/customers/{customerId}"
+      operationId: "updateCustomer"
+      parameters:
+        - name: "customerId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerDto"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Object"
+components:
+  schemas:
+    CustomerDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        street:
+          type: "string"
+        houseNumber:
+          type: "integer"
+          format: "int32"
+        zipcode:
+          type: "string"
+        place:
+          type: "string"
+        email:
+          type: "string"
+        phoneNumber:
+          type: "string"
+    Object:
+      type: "object"
+      properties: { }
