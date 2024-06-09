@@ -1,5 +1,7 @@
 package com.example.lease_a_car.car;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,8 @@ public class CarController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Car>> getCars() {
-        List<Car> cars = carService.getAllCars();
+    public ResponseEntity<Page<Car>> getCars(Pageable pageable) {
+        Page<Car> cars = carService.getAllCars(pageable);
         return ResponseEntity.ok(cars);
     }
 }
