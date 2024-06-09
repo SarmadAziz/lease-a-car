@@ -16,11 +16,12 @@ public class LeaseCalculatorService {
         BigDecimal nettPrice = input.getNettPrice();
 
         // firstTerm = (( mileage / 12 ) * duration ) / Nett price
-        BigDecimal firstTerm = kmPerYear.divide(MONTHS).multiply(durationInMonths)
+        BigDecimal firstTerm = kmPerYear.divide(MONTHS,10, RoundingMode.HALF_UP)
+                .multiply(durationInMonths)
                 .divide(nettPrice, 10, RoundingMode.HALF_UP);
 
         // secondTerm = (( Interest rate / 100 ) * Nett price) / 12
-        BigDecimal secondTerm = interestRate.divide(BigDecimal.valueOf(100))
+        BigDecimal secondTerm = interestRate.divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP)
                 .multiply(nettPrice)
                 .divide(MONTHS, 10, RoundingMode.HALF_UP);
 
