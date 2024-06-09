@@ -8,6 +8,12 @@ import java.math.RoundingMode;
 @Service
 public class LeaseCalculatorService {
 
+    /**
+     * Calculates the lease rate based on the provided input parameters.
+     *
+     * @param input The input containing parameters for the lease rate calculation.
+     * @return The calculated lease rate.
+     */
     public BigDecimal calculateLeaseRate(LeaseRateCalculationInput input) {
         BigDecimal MONTHS = BigDecimal.valueOf(12);
         BigDecimal kmPerYear = BigDecimal.valueOf(input.getKmPerYear());
