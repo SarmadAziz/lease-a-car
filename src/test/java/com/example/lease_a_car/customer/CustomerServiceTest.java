@@ -74,9 +74,7 @@ class CustomerServiceTest {
 
         when(customerRepository.existsById(customerId)).thenReturn(false);
 
-        CustomerNotFoundException exception = assertThrows(CustomerNotFoundException.class, () -> {
-            customerService.deleteCustomer(customerId);
-        });
+        CustomerNotFoundException exception = assertThrows(CustomerNotFoundException.class, () -> customerService.deleteCustomer(customerId));
         assertEquals("Customer with id 1 was not found", exception.getMessage());
     }
 
