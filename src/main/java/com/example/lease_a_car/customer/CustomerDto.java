@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class CustomerDTO {
+public class CustomerDto {
     @Nullable
     private Long id;
 

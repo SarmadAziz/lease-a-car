@@ -14,12 +14,12 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<CustomerDTO> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
         return customers.stream().map(this::convertToDto).toList();
     }
 
-    public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
+    public CustomerDto saveCustomer(CustomerDto customerDTO) {
         Customer customer = convertToEntity(customerDTO);
         Customer savedCustomer = customerRepository.save(customer);
         return convertToDto(savedCustomer);
@@ -33,7 +33,7 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public void updateCustomer(Long customerId, CustomerDTO updatedCustomer) {
+    public void updateCustomer(Long customerId, CustomerDto updatedCustomer) {
         Optional<Customer> existingCustomerOptional = customerRepository.findById(customerId);
         if (existingCustomerOptional.isPresent()) {
             Customer existingCustomer = updateCustomer(updatedCustomer, existingCustomerOptional.get());
@@ -51,8 +51,8 @@ public class CustomerService {
 //                .orElse(customerRepository.save(convertToEntity(updatedCustomer)));
     }
 
-    private CustomerDTO convertToDto(Customer customer) {
-        return CustomerDTO.builder()
+    private CustomerDto convertToDto(Customer customer) {
+        return CustomerDto.builder()
                 .id(customer.getId())
                 .name(customer.getName())
                 .street(customer.getStreet())
@@ -63,7 +63,7 @@ public class CustomerService {
                 .phoneNumber(customer.getPhoneNumber())
                 .build();
     }
-    private Customer convertToEntity(CustomerDTO customerDTO) {
+    private Customer convertToEntity(CustomerDto customerDTO) {
         return Customer.builder()
                 .name(customerDTO.getName())
                 .street(customerDTO.getStreet())
@@ -76,7 +76,7 @@ public class CustomerService {
 
     }
 
-    private static Customer updateCustomer(CustomerDTO updatedCustomer, Customer existingCustomer) {
+    private static Customer updateCustomer(CustomerDto updatedCustomer, Customer existingCustomer) {
         existingCustomer.setName(updatedCustomer.getName());
         existingCustomer.setStreet(updatedCustomer.getStreet());
         existingCustomer.setHouseNumber(updatedCustomer.getHouseNumber());

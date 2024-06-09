@@ -18,24 +18,26 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
-        List<CustomerDTO> customerResponses = customerService.getAllCustomers();
+    public ResponseEntity<List<CustomerDto>> getAllCustomers() {
+        List<CustomerDto> customerResponses = customerService.getAllCustomers();
         return ResponseEntity.ok().body(customerResponses);
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
-        CustomerDTO savedCustomer = customerService.saveCustomer(customerDTO);
+    public ResponseEntity<CustomerDto> createCustomer(@Valid @RequestBody CustomerDto customerDTO) {
+        CustomerDto savedCustomer = customerService.saveCustomer(customerDTO);
         return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{customerId}")
-    public void deleteCustomer(@PathVariable("customerId") Long customerId){
+    public ResponseEntity<Object> deleteCustomer(@PathVariable("customerId") Long customerId){
         customerService.deleteCustomer(customerId);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{customerId}")
-    public void updateCustomer(@PathVariable Long customerId, @Valid @RequestBody CustomerDTO updatedCustomer) {
+    public ResponseEntity<Object> updateCustomer(@PathVariable Long customerId, @Valid @RequestBody CustomerDto updatedCustomer) {
         customerService.updateCustomer(customerId, updatedCustomer);
+        return ResponseEntity.noContent().build();
     }
 }

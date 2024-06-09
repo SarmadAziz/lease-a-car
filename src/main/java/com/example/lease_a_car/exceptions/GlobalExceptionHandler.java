@@ -12,14 +12,17 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomerNotFoundException.class)
-    public ResponseEntity<String> handleCustomerNotFoundException(CustomerNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    public ResponseEntity<ErrorResponse> handleCustomerNotFoundException(CustomerNotFoundException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
         String errorMessages = ex.getBindingResult().getFieldErrors().stream()
-                .map(it -> it.getDefaultMessage() + "\n").collect(Collectors.joining());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessages);
+                .map(it -> it.getDefaultMessage() + ", ").collect(Collectors.joining());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(errorMessages));
     }
+
+    public record ErrorResponse(String message){}
 }
