@@ -46,7 +46,11 @@ customer-service: http://localhost:8082/swagger-ui/index.html#/
 
 car-service: http://localhost:8081/swagger-ui/index.html#/
 
+## Testing the services
+Boot up the api via maven or docker.
 
+You can use Postman to test the endpoints. 
+But if you are using intelij, you can make use of **generated-requests.http** to perform the http calls
 
 
 

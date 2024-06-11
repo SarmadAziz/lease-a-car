@@ -1,0 +1,48 @@
+GET http://localhost:8082/api/v1/customers
+Accept: application/json
+
+###
+POST http://localhost:8082/api/v1/customers
+Content-Type: application/json
+
+{
+  "name": "asd1123123123",
+  "street": "Main Street",
+  "houseNumber": 123,
+  "zipcode": "1234ab",
+  "place": "City",
+  "email": "john.doe@example.com",
+  "phoneNumber": "1234567891"
+}
+
+###
+DELETE http://localhost:8082/api/v1/customers/1
+
+###
+PUT http://localhost:8082/api/v1/customers/1
+Content-Type: application/json
+
+{
+  "id": 5,
+  "name": "updated john",
+  "street": "updated Main Street",
+  "houseNumber": 147,
+  "zipcode": "1234BC",
+  "place": "updated City",
+  "email": "a.a@example.com",
+  "phoneNumber": "1234567890"
+}
+
+###
+GET http://localhost:8081/api/v1/calculateLeaseRate
+Content-Type: application/json
+
+{
+  "kmPerYear": 45000,
+  "durationInMonths": 60,
+  "interestRate": 4.5,
+  "nettPrice": 63000
+}
+
+###
+GET http://localhost:8081/api/v1/cars?page=0&size=30
