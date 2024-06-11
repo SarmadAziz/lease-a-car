@@ -24,8 +24,7 @@ docker build . -t car-service:1.0
 ### run the docker image
 docker run --name car-service-instance -d -it -p 8081:8081 car-service:1.0
 
-## To run customer-service
-### go to folder
+### go to customer-service folder
 cd customer-service
 ### build the docker image
 docker build . -t customer-service:1.0
@@ -36,4 +35,9 @@ docker run --name customer-service-instance -d -it -p 8082:8082 customer-service
 When you use the above 'docker run xxx' command, a processId is printed to your terminal. The processId looks something like: ***41b441614ef2dd68a708719792703d40d44fcbbd2f9dcc6cbba6ddf8815ef7cd***
 ### command to stop
 docker stop <TheProcessId>
+
+## run services with docker compose
+From the root directory simply use:
+
+docker compose -f docker-compose.yml up
 
