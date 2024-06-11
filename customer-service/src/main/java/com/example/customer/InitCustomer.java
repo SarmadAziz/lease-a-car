@@ -1,10 +1,12 @@
 package com.example.customer;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Service;
 
 /**
  * This class initializes the customer database with two customers, not something you want for prod obviously
  */
+@Service
 public class InitCustomer {
     private final CustomerRepository customerRepository;
 
